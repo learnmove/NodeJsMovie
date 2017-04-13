@@ -1,0 +1,13 @@
+extends ../layouts
+block content
+    .container
+        .row
+            each movie,index in movies
+                .col-md-2
+                    .thumbnail
+                        a(href="/movie/#{movie.id}")
+                            img(src="#{movie.poster}",alt="#{movie.title}")
+                        .caption
+                            h3 #{title}
+                            p:a.btn.btn-primary(href="",role="button")
+                            觀看
