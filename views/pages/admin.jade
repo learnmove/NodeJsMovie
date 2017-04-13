@@ -3,6 +3,7 @@ block content
     .container
         .row
             form.form-horizontal(method="post",action="/admin/movie/new")
+
                 .form-group
                     label.col-sm-1.control-label(for="inputTitle")電影名字
                     .col-sm-9
@@ -16,9 +17,13 @@ block content
                     .col-sm-9
                         input#inputTitle.form-control(type="text",name="nation")
                 .form-group
+                    label.col-sm-1.control-label(for="inputTitle")語言
+                    .col-sm-9
+                        input#inputTitle.form-control(type="text",name="lang")
+                .form-group
                     label.col-sm-1.control-label(for="inputTitle")上映年份
                     .col-sm-9
-                        input#inputTitle.form-control(type="text",name="year")
+                        input#inputTitle.form-control(type="date",name="year")
                  .form-group
                     label.col-sm-1.control-label(for="inputTitle")摘要
                     .col-sm-9

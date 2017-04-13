@@ -1,11 +1,10 @@
 var mongoose =require('mongoose');
 var MovieSchema=new mongoose.Schema({
-_id:Number,
 title:String,
 director:String,
 nation:String,
 lang:String,
-year:Number,
+year:Date,
 summary:String,
 poster:String,
 meta:{
@@ -36,7 +35,7 @@ MovieSchema.statics={
     },
     findById:function(id,cb){
         return this
-        .findOne({id:id})
+        .findOne({_id:id})
         .exec(cb);
     }
     

@@ -5,13 +5,12 @@ var path =require('path');
 var bodyPaser = require('body-parser');
 var mongoose=require('mongoose');
 var Movie=require('./models/movie');
-var movi=require('./apijson/movie');
 var _=require('underscore');
 mongoose.connect('mongodb://localhost:27017/test');
 mongoose.connection.on('connected', function () {  
-  console.log('Mongoose default connection open to');
+  console.log('Mongoose connect success');
 }); 
-
+app.locals.moment=require('moment');
 app.set('views','./views');
 app.set('view engine','jade');
 app.use(bodyPaser.urlencoded({extended:false}));
@@ -35,7 +34,7 @@ app.get('/movie/:id',function(req,res){
         console.log(movie);
         res.render('pages/detail',{
         title:'detail',
-        movie:''
+        movie:movie
     });
     });
     
@@ -59,8 +58,8 @@ app.post('/admin/movie/new',function(req,res){
     var _movie=new Movie(movie);
     _movie.save(function(err,movie){
         if(err){
+            console.log(err);
             res.send(err);
-            
         }else{
         res.redirect('/');
         }
