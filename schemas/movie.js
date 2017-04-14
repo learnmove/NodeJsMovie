@@ -6,7 +6,7 @@ nation:String,
 lang:String,
 year:Date,
 summary:String,
-poster:String,
+poster:{type:String,default:''},
 meta:{
     createAt:{
         type:Date,

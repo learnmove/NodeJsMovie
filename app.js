@@ -25,10 +25,13 @@ app.listen(port);
 console.log('server start ',port);
 // index
 app.get('/',function(req,res){
-    res.render('pages/index',{
+    Movie.fetch(function(err,movies){
+        res.render('pages/index',{
         title:'hello',
-        movies:[{id:1,title:'星際異攻隊2',poster:'http://www.ambassador.com.tw/assets/img/movies/GuardiansoftheGalaxy201.jpg'}]
+        movies:movies
     });
+    })
+  
 });
 
 app.get('/movie/:id',function(req,res){
