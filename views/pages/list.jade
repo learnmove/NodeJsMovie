@@ -1,5 +1,6 @@
 extends ../layouts
 block content
+    
     .container
         .row
             table.table.table-hover.table-bordered
@@ -27,6 +28,4 @@ block content
                             td: a.btn.btn-info(target="_blank",href="../admin/update/#{movie.id}")修改
                             td
                                 button.btn.btn-danger.del(type="button",data-id="#{movie.id}")刪除
-
-                            
-                            
+    script(src="/js/admin.js")

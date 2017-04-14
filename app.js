@@ -16,7 +16,7 @@ app.set('view engine','jade');
 app.use(bodyPaser.urlencoded({extended:false}));
 app.use(bodyPaser.json());
 app.use(express.static(__dirname))
-app.use('/bower_components',express.static(__dirname+'/bower_components'));
+app.use(express.static(__dirname+'/public'));
 app.use('/video',express.static(path.join(__dirname,'video')))
 app.listen(port);
 console.log('server start ',port);
@@ -53,6 +53,20 @@ app.get('/admin/list',function(req,res){
     });
    
 });
+app.delete('/admin/list',function(req,res){
+    var id=req.query.id;
+    if(id){
+        Movie.remove({_id:id},function(err,movie){
+            if(err){
+                console.log(err);
+            }else{
+                res.json({success:1});
+            }
+        });
+    }
+        // {id:1,title:'星際異攻隊2',poster:'http://www.ambassador.com.tw/assets/img/movies/GuardiansoftheGalaxy201.jpg',director:'魏德聖',lang:'國語',year:'2008-01-30',summary:'神秘環太平洋巨獸襲擊地球，如果能遠端操控牠，你會怎麼做'}
+    });
+
 app.post('/admin/movie/new',function(req,res){
     var movie=req.body;
     var _movie=new Movie(movie);
