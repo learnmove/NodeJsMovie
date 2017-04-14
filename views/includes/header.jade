@@ -6,7 +6,7 @@
 			a.navbar-link(href="#",data-toggle="modal",data-target="#signupmodal")註冊
 			span &nbsp;
 			a.navbar-link(href="#",data-toggle="modal",data-target="#signinmodal")登錄
-.modal.fade#signinmodal
+.modal.fade#signupmodal
 	.modal-dialog
 		.modal-content
 			form(method="POST",action="/user/signup")
@@ -21,4 +21,18 @@
 				.modal-footer
 					button.btn.btn-primary(type="button",data-dismiss="modal")取消
 					button.btn.btn-primary(type="submit")送出
-					
+.modal.fade#signinmodal
+	.modal-dialog
+		.modal-content
+			form(method="POST",action="/user/signin")
+				.modal-header 登錄
+				.modal-body
+					.form-group
+						label(for="signname")帳號名稱
+						input.form-control(type="text",name="username")
+					.form-group
+						label(for="signpass")密碼
+						input.form-control(type="text",name="password")
+				.modal-footer
+					button.btn.btn-primary(type="button",data-dismiss="modal")取消
+					button.btn.btn-primary(type="submit")送出

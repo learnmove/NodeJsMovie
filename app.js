@@ -4,6 +4,7 @@ var app = express();
 var path =require('path');
 var bodyPaser = require('body-parser');
 var mongoose=require('mongoose');
+var User=require('./models/user');
 var Movie=require('./models/movie');
 var _=require('underscore');
 var methodOverride=require('method-override');
@@ -127,6 +128,49 @@ app.post('/admin/movie/new',function(req,res){
         }
        
     });
+});
+// User
+app.post('/user/signup',function(req,res){
+    var userdata=req.body;
+    User.find({username:userdata.username},function(err,user){
+        if(user==null){
+            console.log(user);
+        }else{
+    var _user=new User(userdata);
+    _user.save(function(err,result){
+        if(err){
+            console.log(err);
+        }else{
+            res.redirect('/');
+        }
+
+    });
+        }
+    });
+   
+});
+app.post('/user/signin',function(req,res){
+    var userdata=req.body;
+    User.findOne({username:userdata.username},function(err,user){
+        if(err){console.log('user err');}
+        if(!user){
+            console.log('不存在');
+            return res.redirect('/')
+        };
+        user.comparePassword(userdata.password,function(err,isMatch){
+            if(err){
+                console.log('比較程序有錯');
+            }
+            if(isMatch){
+                console.log('登錄成功');
+                return res.redirect('/');
+            }else{
+                console.log('密碼錯錯');
+                return redirect('/');
+            }
+        });
+    });
+    
 });
 
                 

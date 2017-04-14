@@ -1,22 +1,22 @@
 var mongoose =require('mongoose');
 var MovieSchema=new mongoose.Schema({
-title:String,
-director:String,
-nation:String,
-lang:String,
-year:Date,
-summary:String,
-poster:{type:String,default:''},
-meta:{
-    createAt:{
-        type:Date,
-        default:Date.now()
-    },
-        updateAt:{
-        type:Date,
-        default:Date.now()
+    title:String,
+    director:String,
+    nation:String,
+    lang:String,
+    year:Date,
+    summary:String,
+    poster:{type:String,default:''},
+    meta:{
+        createAt:{
+            type:Date,
+            default:Date.now()
+        },
+            updateAt:{
+            type:Date,
+            default:Date.now()
+        }
     }
-}
 });
 MovieSchema.pre('save',function(next){
     if(this.isNew){
