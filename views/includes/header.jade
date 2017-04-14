@@ -1,5 +1,24 @@
-.container
-    .row
-        .page-header
-            h1=title
-            small 重度
+.navbar.navbar-default.navbar-fixed-bottom
+	.container
+		.navbar-header
+			a.navbar-brand(href="/")電影院
+		p.navbar-text.navbar-right
+			a.navbar-link(href="#",data-toggle="modal",data-target="#signupmodal")註冊
+			span &nbsp;
+			a.navbar-link(href="#",data-toggle="modal",data-target="#signinmodal")登錄
+.modal.fade#signinmodal
+	.modal-dialog
+		.modal-content
+			form(method="POST",action="/user/signup")
+				.modal-header 註冊
+				.modal-body
+					.form-group
+						label(for="signname")帳號名稱
+						input.form-control(type="text",name="username")
+					.form-group
+						label(for="signpass")密碼
+						input.form-control(type="text",name="password")
+				.modal-footer
+					button.btn.btn-primary(type="button",data-dismiss="modal")取消
+					button.btn.btn-primary(type="submit")送出
+					

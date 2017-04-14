@@ -27,7 +27,7 @@ console.log('server start ',port);
 app.get('/',function(req,res){
     Movie.fetch(function(err,movies){
         res.render('pages/index',{
-        title:'hello',
+        title:'index',
         movies:movies
     });
     })
