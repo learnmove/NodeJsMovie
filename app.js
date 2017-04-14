@@ -87,7 +87,14 @@ app.delete('/admin/list',function(req,res){
 app.put('/admin/movie/update/:id',function(req,res){
     var id=req.params.id;
        if(id){
+        //    Movie.findById(id,function(err,movie){
+            //  var _movie=_.extend(movie,reqlbody)
+            // _movie.save(function(err,movie){
+
+            // })
+        // })
         Movie.findByIdAndUpdate(id,req.body,function(err,movie){
+          
             if(err){
                 console.log(err)
             }else{
