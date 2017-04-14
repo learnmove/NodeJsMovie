@@ -1,0 +1,33 @@
+extends ../layouts
+block content
+    .container
+        .row
+                form.form-horizontal(method="post" action="/admin/movie/update/#{moviedata.id}?_method=PUT")
+                    //- input(type="hidden",name="_method",value="put")
+                    .form-group
+                        label.col-sm-1.control-label(for="inputTitle")電影名字 
+                        .col-sm-9
+                            input#inputTitle.form-control(type="text",name="title",value="#{moviedata.title}")
+                    .form-group
+                        label.col-sm-1.control-label(for="inputTitle" )導演
+                        .col-sm-9
+                            input#inputTitle.form-control(type="text",name="director",value="#{moviedata.director}")
+                    .form-group
+                        label.col-sm-1.control-label(for="inputTitle")國家
+                        .col-sm-9
+                            input#inputTitle.form-control(type="text",name="nation",value="#{moviedata.nation}")
+                    .form-group
+                        label.col-sm-1.control-label(for="inputTitle")語言
+                        .col-sm-9
+                            input#inputTitle.form-control(type="text",name="lang",value="#{moviedata.lang}")
+                    .form-group
+                        label.col-sm-1.control-label(for="inputTitle")上映年份
+                        .col-sm-9
+                            input#inputTitle.form-control(type="date",name="year",value="#{moment(moviedata.year).format('YYYY-DD-MM')}")
+                    .form-group
+                        label.col-sm-1.control-label(for="inputTitle")摘要
+                        .col-sm-9
+                            input#inputTitle.form-control(type="text",name="summary",value="#{moviedata.summary}")
+                    .form-group
+                        .col-sm-9
+                        button.btn.btn-primary(type="submit")確定

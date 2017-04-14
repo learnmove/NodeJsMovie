@@ -6,6 +6,7 @@ var bodyPaser = require('body-parser');
 var mongoose=require('mongoose');
 var Movie=require('./models/movie');
 var _=require('underscore');
+var methodOverride=require('method-override');
 mongoose.connect('mongodb://localhost:27017/test');
 mongoose.connection.on('connected', function () {  
   console.log('Mongoose connect success');
@@ -13,6 +14,8 @@ mongoose.connection.on('connected', function () {
 app.locals.moment=require('moment');
 app.set('views','./views');
 app.set('view engine','jade');
+app.use(methodOverride('_method'));
+
 app.use(bodyPaser.urlencoded({extended:false}));
 app.use(bodyPaser.json());
 app.use(express.static(__dirname))
@@ -43,6 +46,16 @@ app.get('/admin/movie',function(req,res){
     res.render('pages/admin',{
         title:'admin',
     });
+});
+app.get('/admin/movie/update',function(req,res){
+    var id=req.query.id;
+    Movie.findById(id,function(err,result){
+        console.log(result);
+        res.render('pages/admin-update',{
+        title:'admin',moviedata:result
+    });
+    });
+
     });
 app.get('/admin/list',function(req,res){
     Movie.fetch(function(err,movies){
@@ -52,6 +65,11 @@ app.get('/admin/list',function(req,res){
     });
     });
    
+});
+app.get('/admin/movie',function(req,res){
+    res.render('pages/admin',{
+        title:'admin',
+    });
 });
 app.delete('/admin/list',function(req,res){
     var id=req.query.id;
@@ -66,6 +84,26 @@ app.delete('/admin/list',function(req,res){
     }
         // {id:1,title:'星際異攻隊2',poster:'http://www.ambassador.com.tw/assets/img/movies/GuardiansoftheGalaxy201.jpg',director:'魏德聖',lang:'國語',year:'2008-01-30',summary:'神秘環太平洋巨獸襲擊地球，如果能遠端操控牠，你會怎麼做'}
     });
+app.put('/admin/movie/update/:id',function(req,res){
+    var id=req.params.id;
+       if(id){
+        Movie.findByIdAndUpdate(id,req.body,function(err,movie){
+            if(err){
+                console.log(err)
+            }else{
+                // res.send('ok');
+                res.redirect('/');
+            }
+
+
+
+        });
+
+    }else{
+    res.send('id not exist');
+        
+    }
+});
 
 app.post('/admin/movie/new',function(req,res){
     var movie=req.body;

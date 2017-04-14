@@ -25,7 +25,7 @@ block content
                             td #{movie.year}
                             td #{moment(movie.meta.createAt).format('MM/DD/YYYY')}
                             td: a.btn.btn-default(href="../movie/#{movie.id}") 查看
-                            td: a.btn.btn-info(target="_blank",href="../admin/update/#{movie.id}")修改
+                            td: a.btn.btn-info(target="_blank",href="../admin/movie/update?id=#{movie.id}")修改
                             td
                                 button.btn.btn-danger.del(type="button",data-id="#{movie.id}")刪除
     script(src="/js/admin.js")
