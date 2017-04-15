@@ -1,11 +1,18 @@
 .navbar.navbar-default.navbar-fixed-bottom
 	.container
 		.navbar-header
-			a.navbar-brand(href="/")電影院
-		p.navbar-text.navbar-right
-			a.navbar-link(href="#",data-toggle="modal",data-target="#signupmodal")註冊
-			span &nbsp;
-			a.navbar-link(href="#",data-toggle="modal",data-target="#signinmodal")登錄
+			a.navbar-brand(href="/") 電影院
+		
+		if (!user)
+			p.navbar-text.navbar-right
+				a.navbar-link(href="#",data-toggle="modal",data-target="#signupmodal") 註冊
+				span &nbsp;
+				a.navbar-link(href="#",data-toggle="modal",data-target="#signinmodal") 登錄
+		else
+			p.navbar-text.navbar-right
+				span 歡迎#{user.username}
+				span &nbsp;
+				a.navbar-link(href="/logout") 登出
 .modal.fade#signupmodal
 	.modal-dialog
 		.modal-content
@@ -13,14 +20,14 @@
 				.modal-header 註冊
 				.modal-body
 					.form-group
-						label(for="signname")帳號名稱
+						label(for="signname") 帳號名稱
 						input.form-control(type="text",name="username")
 					.form-group
-						label(for="signpass")密碼
+						label(for="signpass") 密碼
 						input.form-control(type="text",name="password")
 				.modal-footer
-					button.btn.btn-primary(type="button",data-dismiss="modal")取消
-					button.btn.btn-primary(type="submit")送出
+					button.btn.btn-primary(type="button",data-dismiss="modal") 取消
+					button.btn.btn-primary(type="submit") 送出
 .modal.fade#signinmodal
 	.modal-dialog
 		.modal-content
@@ -28,11 +35,11 @@
 				.modal-header 登錄
 				.modal-body
 					.form-group
-						label(for="signname")帳號名稱
+						label(for="signname") 帳號名稱
 						input.form-control(type="text",name="username")
 					.form-group
-						label(for="signpass")密碼
+						label(for="signpass") 密碼
 						input.form-control(type="text",name="password")
 				.modal-footer
-					button.btn.btn-primary(type="button",data-dismiss="modal")取消
-					button.btn.btn-primary(type="submit")送出
+					button.btn.btn-primary(type="button",data-dismiss="modal") 取消
+					button.btn.btn-primary(type="submit") 送出

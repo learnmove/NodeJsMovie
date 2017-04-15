@@ -7,6 +7,8 @@ var mongoose=require('mongoose');
 var User=require('./models/user');
 var Movie=require('./models/movie');
 var _=require('underscore');
+var session=require('express-session');
+var cookieParser=require('cookie-parser');
 var methodOverride=require('method-override');
 mongoose.connect('mongodb://localhost:27017/test');
 mongoose.connection.on('connected', function () {  
@@ -16,7 +18,10 @@ app.locals.moment=require('moment');
 app.set('views','./views');
 app.set('view engine','jade');
 app.use(methodOverride('_method'));
-
+app.use(cookieParser());
+app.use(session({
+    secret:'i am person',
+}));
 app.use(bodyPaser.urlencoded({extended:false}));
 app.use(bodyPaser.json());
 app.use(express.static(__dirname))
@@ -26,6 +31,11 @@ app.listen(port);
 console.log('server start ',port);
 // index
 app.get('/',function(req,res){
+    var user=req.session.user
+    if(user){
+    app.locals.user=user;
+
+    }
     Movie.fetch(function(err,movies){
         res.render('pages/index',{
         title:'index',
@@ -34,7 +44,12 @@ app.get('/',function(req,res){
     })
   
 });
-
+app.get('/logout',function(req,res){
+   delete req.session.user;
+   delete app.locals.user;
+   
+   res.redirect('/');
+});
 app.get('/movie/:id',function(req,res){
     var id=req.params.id;
     Movie.findById(id,function(err,movie){
@@ -132,15 +147,21 @@ app.post('/admin/movie/new',function(req,res){
 // User
 app.post('/user/signup',function(req,res){
     var userdata=req.body;
+    
     User.find({username:userdata.username},function(err,user){
-        if(user==null){
+        console.log(user);
+        if(user.length>=1){
             console.log(user);
+            console.log('帳戶已存在');
         }else{
     var _user=new User(userdata);
     _user.save(function(err,result){
         if(err){
+            console.log('帳戶可能已存在');
             console.log(err);
         }else{
+            console.log('註冊成功');
+            req.session.user=_user;
             res.redirect('/');
         }
 
@@ -162,6 +183,7 @@ app.post('/user/signin',function(req,res){
                 console.log('比較程序有錯');
             }
             if(isMatch){
+                req.session.user=user;
                 console.log('登錄成功');
                 return res.redirect('/');
             }else{
