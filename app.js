@@ -14,7 +14,7 @@ mongoose.connection.on('connected', function () {
   console.log('Mongoose connect success');
 }); 
 app.locals.moment=require('moment');
-app.set('views','./views');
+app.set('views','./app/views');
 app.set('view engine','jade');
 app.use(methodOverride('_method'));
 app.use(cookieParser());
