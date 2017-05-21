@@ -2,13 +2,13 @@ exports.member=function(req,res,next){
     if(req.session.user){
         next();
     }else{
-        res.redirect('/google');
+        res.redirect('/');
     }
 }
 exports.admin=function(req,res,next){
     if(req.session.user.role>50){
         next();
     }else{
-        res.redirect('/google');
+        res.redirect('/');
     }
 }

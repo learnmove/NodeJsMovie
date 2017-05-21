@@ -49,7 +49,7 @@ exports.signin=function(req,res){
                 return res.redirect('/');
             }else{
                 console.log('密碼錯錯');
-                return redirect('/');
+                return res.redirect('/');
             }
         });
     });

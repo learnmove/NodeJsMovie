@@ -21,21 +21,12 @@ app.use(cookieParser());
 app.use(session({
     secret:'i am person',
 }));
-app.use(bodyPaser.urlencoded({extended:false}));
+app.use(bodyPaser.urlencoded({extended:true}));
 app.use(bodyPaser.json());
 app.use(express.static(__dirname))
 app.use(express.static(__dirname+'/public'));
 app.use('/video',express.static(path.join(__dirname,'video')));
-app.use(function(req,res,next){
-        var user=req.session.user
-    if(user){
-    app.locals.user=user;
-        next()
 
-    }else{
-        next()
-    }
-});
 app.listen(port);
 require('./config/routes')(app);
 if('development'===app.get('env')){

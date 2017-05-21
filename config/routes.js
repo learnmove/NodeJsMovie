@@ -1,6 +1,8 @@
 var User=require('../app/controllers/user');
 var Index=require('../app/controllers/index');
 var Movie=require('../app/controllers/movie');
+var Comment=require('../app/controllers/comment');
+var Category=require('../app/controllers/category');
 var RoleControl=require('../app/middlewares/user');
 
 // index
@@ -16,6 +18,7 @@ app.locals.user=user;
 app.get('/',Index.index);
 
 app.use('/admin',RoleControl.member,RoleControl.admin);//middleware group
+
 app.get('/movie/:id',Movie.getMovie);
 app.get('/admin/movie/update',Movie.getUpdate);
 app.get('/admin/list',Movie.list);
@@ -27,4 +30,13 @@ app.post('/admin/movie/new',Movie.new);
 app.post('/user/signup',User.signup);
 app.get('/logout',User.logout);
 app.post('/user/signin',User.signin);
+
+app.post('/user/comment',Comment.comment);
+// Category
+app.get('/admin/category/new',Category.new);
+// app.post('/admin/category/new',Category.save);
+// app.get('/admin/category/list',Category.getList);
+
+
+
 }

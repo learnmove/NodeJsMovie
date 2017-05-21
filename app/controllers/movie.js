@@ -1,6 +1,6 @@
 var Movie=require('../models/movie');
 var _=require('underscore');
-
+var Comment=require('../models/comment');
 exports.new=function(req,res){
     var movie=req.body;
     var _movie=new Movie(movie);
@@ -82,11 +82,20 @@ exports.getUpdate=function(req,res){
 exports.getMovie=function(req,res){
     var id=req.params.id;
     Movie.findById(id,function(err,movie){
-        console.log(movie);
-        res.render('pages/detail',{
-        title:'detail',
-        movie:movie
-    });
+        Comment.find({movie:id})
+        .populate('from','username')
+        .populate('reply.from reply.to','username')
+        .exec(function(err,comments){
+            console.log(comments);
+                    res.render('pages/detail',{
+                    title:'detail',
+                    movie:movie,
+                    comments:comments
+                });
+        })
+
+        ;
+      
     });
     
     }
