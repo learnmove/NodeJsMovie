@@ -40,5 +40,6 @@ app.post('/admin/category/new',Category.save);
 // app.get('/admin/category/list',Category.getList);
 
 
-
+// Category result
+app.get('/:category/:page',Index.page);
 }
