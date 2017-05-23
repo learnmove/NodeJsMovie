@@ -40,7 +40,7 @@ exports.page=function(req,res){
             console.log(movieChunk);
             res.render('pages/category-result',
             {
-        title:{gg:'shit'},
+        title:'目錄頁',
         category:category[0],
         movieChunk:movieChunk,
         totalPage:totalPage,
@@ -49,4 +49,21 @@ exports.page=function(req,res){
         })
         ;
         
+}
+exports.search=function(req,res){
+    var MovieName=req.query.keyword;
+    Movie.find({title:{$regex:MovieName,$options:'i'}},function(err,movies){
+        if(movies.length==0){
+            result="找不到結果";
+        }else{
+            result="結果如下"
+        }
+        res.render('pages/search-page',
+        {
+            result:result,
+            movies
+        }
+        );
+
+    });
 }

@@ -42,4 +42,6 @@ app.post('/admin/category/new',Category.save);
 
 // Category result
 app.get('/:category/:page',Index.page);
+//Search movie
+app.get('/search',Index.search);
 }

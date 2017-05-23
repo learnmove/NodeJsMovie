@@ -77,3 +77,4 @@
 ::1 - - [Mon, 22 May 2017 05:41:00 GMT] "GET /undefined HTTP/1.1" 404 148 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
 ::1 - - [Mon, 22 May 2017 09:57:11 GMT] "GET /admin/movie/update/58f056f2f4cef7348467a884?_method=PUT HTTP/1.1" 404 182 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
 ::1 - - [Mon, 22 May 2017 09:57:13 GMT] "GET /admin/movie/update/58f056f2f4cef7348467a884?_method=PUT HTTP/1.1" 404 182 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+::1 - - [Tue, 23 May 2017 15:54:32 GMT] "GET /search?keyword=qwd HTTP/1.1" 404 145 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"

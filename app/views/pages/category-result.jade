@@ -1,32 +1,38 @@
 extends ../layouts
 block content
     .container
-        .row
-            .panel.panel-default
-                .panel-heading
-                    h3 #{category.name} 
+            .row
+                .page-header
+                    h1=title
+                    .row
+                        .col-md-4
+                                small #{category.name} 
 
-                .panel-body
-                    if category.movies && category.movies.length>0
-                        each movie in movieChunk
-                            .col-md-2
-                                .thumbnail
-                                    a(href="/movie/#{movie.id}")
-                                        img(src="#{movie.poster}",alt="#{movie.title}")
-                                    .caption
-                                        h4 片名：#{movie.title}
-                                        p: a.btn.btn-primary(href="",role="button") 觀看
-            ul.pagination
-                -for (var i=1;i<=totalPage;i++){
-                    -if(i==currentPage){
-                        li.active
-                            span #{i}
+                .panel.panel-default
+                    .panel-heading
+                        h3 #{category.name} 
                         
-                    -}else{
-                        li
-                            a(href="/#{category._id}/#{i}") #{i} 
+                    .panel-body
+                        if category.movies && category.movies.length>0
+                            each movie in movieChunk
+                                .col-md-2
+                                    .thumbnail
+                                        a(href="/movie/#{movie.id}")
+                                            img(src="#{movie.poster}",alt="#{movie.title}")
+                                        .caption
+                                            h4 片名：#{movie.title}
+                                            p: a.btn.btn-primary(href="",role="button") 觀看
+                ul.pagination
+                    -for (var i=1;i<=totalPage;i++){
+                        -if(i==currentPage){
+                            li.active
+                                span #{i}
+                            
+                        -}else{
+                            li
+                                a(href="/#{category._id}/#{i}") #{i} 
+                        -}
                     -}
-                -}
-                 
-                      
+                    
                         
+                            
