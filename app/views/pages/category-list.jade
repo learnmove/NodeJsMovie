@@ -1,0 +1,19 @@
+extends ../layouts
+block content
+    .container
+        .row
+            table.table.table-hover.table-bordered
+                thead
+                    tr
+                        th 電影類別
+                        th 日期 
+                        th 修改
+                        th 刪除
+                tbody
+                each item in cat
+                    tr
+                        td #{item.name}
+                        td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
+                        td: a.btn.btn-info()修改
+                        td: button.btn.btn-danger.del(type="button") 刪除
+    script(src="/js/admin.js")

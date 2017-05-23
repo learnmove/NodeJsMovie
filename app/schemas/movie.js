@@ -1,10 +1,15 @@
 var mongoose =require('mongoose');
+var ObjectId=mongoose.Schema.Types.ObjectId;
 var MovieSchema=new mongoose.Schema({
     title:String,
     director:String,
     nation:String,
     lang:String,
     year:Date,
+    category:{
+        type:ObjectId,
+        ref:'Category'
+    },
     summary:String,
     poster:{type:String,default:''},
     meta:{

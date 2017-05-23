@@ -1,11 +1,19 @@
 var Movie=require('../models/movie');
+var Category=require('../models/category');
 exports.index=function(req,res){
 
     Movie.fetch(function(err,movies){
-        res.render('pages/index',{
+        Category.find({})
+        .populate('movies')
+        .exec(function(err,categories){
+            res.render('pages/index',{
         title:'index',
-        movies:movies
+        movies:movies,
+        categories:categories
     });
-    })
+        })
+        ;
+        
+    });
   
 }

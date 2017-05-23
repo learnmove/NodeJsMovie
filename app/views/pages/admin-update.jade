@@ -9,6 +9,11 @@ block content
                         .col-sm-9
                             input#inputTitle.form-control(type="text",name="title",value="#{moviedata.title}")
                     .form-group
+                        each category in categories
+                            label.radio-inline
+                                input(type="radio",name="category",value=category.id,checked=(category.id==moviedata.category? true:false)) 
+                                span #{category.name}
+                    .form-group
                         label.col-sm-1.control-label(for="inputTitle" )導演
                         .col-sm-9
                             input#inputTitle.form-control(type="text",name="director",value="#{moviedata.director}")

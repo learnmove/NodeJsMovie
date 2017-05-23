@@ -17,7 +17,7 @@ app.locals.user=user;
 
 app.get('/',Index.index);
 
-app.use('/admin',RoleControl.member,RoleControl.admin);//middleware group
+// app.use('/admin',RoleControl.member,RoleControl.admin);//middleware group
 
 app.get('/movie/:id',Movie.getMovie);
 app.get('/admin/movie/update',Movie.getUpdate);
@@ -34,7 +34,9 @@ app.post('/user/signin',User.signin);
 app.post('/user/comment',Comment.comment);
 // Category
 app.get('/admin/category/new',Category.new);
-// app.post('/admin/category/new',Category.save);
+app.get('/admin/categories/list',Category.list);
+
+app.post('/admin/category/new',Category.save);
 // app.get('/admin/category/list',Category.getList);
 
 

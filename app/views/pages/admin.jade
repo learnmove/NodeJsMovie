@@ -9,6 +9,11 @@ block content
                     .col-sm-9
                         input#inputTitle.form-control(type="text",name="title")
                 .form-group
+                    each cat in categories
+                        label.radio-inline
+                            input#inputCategory(type="radio",name="category",value="#{cat._id}") 
+                            span #{cat.name} 
+                .form-group
                     label.col-sm-1.control-label(for="inputTitle")導演
                     .col-sm-9
                         input#inputTitle.form-control(type="text",name="director")
