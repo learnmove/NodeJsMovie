@@ -33,7 +33,7 @@ if('development'===app.get('env')){
     app.set('showStackError',true);
     app.use(logger({path:'./log/log.txt'}));
     app.locals.pretty=true;
-    mongoose.set('debug',true);
+    mongoose.set('debug',false);
 
 }
 console.log('server start ',port);

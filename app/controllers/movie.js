@@ -2,8 +2,13 @@ var Movie=require('../models/movie');
 var _=require('underscore');
 var Comment=require('../models/comment');
 var Category=require('../models/category');
+var Movie=require('../models/movie');
 exports.new=function(req,res){
-    var movie=req.body;
+console.log(req.file);
+  req.body.poster=req.file.filename;
+  var movie=req.body;
+  
+  
     var _movie=new Movie(movie);
     var categoryId=movie.category;
     _movie.save(function(err,movie){
@@ -11,13 +16,15 @@ exports.new=function(req,res){
         findcategory.movies.push(movie._id);
         findcategory.save(function(err,category){
             if(err){
-            console.log(err);1
+            console.log(err);
         }else{
         res.redirect('/');
         }
     });
     });
     });
+
+  
 }
 exports.update=function(req,res){
     var id=req.params.id;
@@ -33,19 +40,26 @@ exports.update=function(req,res){
              Category.findById(movie.category,function(err,category){
                  category.movies=category.movies.filter(
                      function(returnObject){
-                     console.log(returnObject+"//////"+movie._id);
                     return returnObject.toString()!==movie._id.toString();
                  });
                  category.save(function(err,category){
-                    movie.category=categoryId;
-                     movie.save(function(err,movie){
+                     movie.title=req.body.title;
+                     movie.category=req.body.category;
+                     movie.nation=req.body.nation;
+                     movie.lang=req.body.lang;
+                     movie.year=req.body.year;
+                     movie.summary=req.body.summary;
+                     movie.poster=req.file.filename;
+                     movie.save(function(err,movieResult){
                         Category.findById(categoryId,function(err,category){
                            category.movies.push(movie._id) ;
                            category.save(function(err,category){
                             res.redirect('/');
                            });
                         });
-                     });
+                     })
+                        
+                    
                  });
                 
              });
@@ -88,7 +102,6 @@ exports.deleteMovie=function(req,res){
     }
 exports.getAdminMovie=function(req,res){
     Category.find({},function(err,categories){
-console.log(categories);
          res.render('pages/admin',{
         title:'admin',
         categories:categories
@@ -133,7 +146,6 @@ exports.getMovie=function(req,res){
         .populate('from','username')
         .populate('reply.from reply.to','username')
         .exec(function(err,comments){
-            console.log(movie);
                     res.render('pages/detail',{
                     title:'detail',
                     movie:movie,

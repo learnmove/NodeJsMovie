@@ -2,7 +2,7 @@ extends ../layouts
 block content
     .container
         .row
-                form.form-horizontal(method="post" action="/admin/movie/update/#{moviedata.id}?_method=PUT")
+                form.form-horizontal(method="post" action="/admin/movie/update/#{moviedata.id}?_method=PUT",enctype="multipart/form-data")
                     //- input(type="hidden",name="_method",value="put")
                     .form-group
                         label.col-sm-1.control-label(for="inputTitle")電影名字 
@@ -33,10 +33,11 @@ block content
                         label.col-sm-1.control-label(for="inputTitle")摘要
                         .col-sm-9
                             input#inputTitle.form-control(type="text",name="summary",value="#{moviedata.summary}")
+
                     .form-group
-                        label.col-sm-1.control-label(for="inputTitle")海報網址
+                        label.col-sm-1.control-label(for="inputTitle") 上傳海報
                         .col-sm-9
-                            input#inputTitle.form-control(type="text",name="poster",value="#{moviedata.poster}")
+                            input#inputTitle.form-control(type="file",name="poster")
                     .form-group
                         .col-sm-9
                         button.btn.btn-primary(type="submit")確定

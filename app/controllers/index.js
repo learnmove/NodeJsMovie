@@ -21,7 +21,9 @@ exports.index=function(req,res){
     });
   
 }
-exports.page=function(req,res){
+exports.pages=function(req,res){
+  if(req.params.page!="undefined"){
+
     var page=req.params.page-1;
     var categoryId=req.params.category;
     var count=2;
@@ -46,8 +48,12 @@ exports.page=function(req,res){
         totalPage:totalPage,
         currentPage:req.params.page
     });
+           
         })
         ;
+    }else{
+        next();
+    }
         
 }
 exports.search=function(req,res){

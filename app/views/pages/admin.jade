@@ -2,7 +2,7 @@ extends ../layouts
 block content
     .container
         .row
-            form.form-horizontal(method="post",action="/admin/movie/new")
+            form.form-horizontal(method="post",action="/admin/movie/new",enctype="multipart/form-data")
 
                 .form-group
                     label.col-sm-1.control-label(for="inputTitle")電影名字
@@ -11,7 +11,7 @@ block content
                 .form-group
                     each cat in categories
                         label.radio-inline
-                            input#inputCategory(type="radio",name="category",value="#{cat._id}") 
+                            input#inputCategory(type="radio",name="category",value="#{cat._id}" ) 
                             span #{cat.name} 
                 .form-group
                     label.col-sm-1.control-label(for="inputTitle")導演
@@ -33,6 +33,11 @@ block content
                     label.col-sm-1.control-label(for="inputTitle")摘要
                     .col-sm-9
                         input#inputTitle.form-control(type="text",name="summary")
+                 .form-group
+                    label.col-sm-1.control-label(for="inputFile") 上傳海報
+                    .col-sm-9
+                        input#inputFile.form-control(type="file",name="poster")
+
                  .form-group
                     .col-sm-9
                     button.btn.btn-primary(type="submit")確定

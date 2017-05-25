@@ -4,7 +4,8 @@ var Movie=require('../app/controllers/movie');
 var Comment=require('../app/controllers/comment');
 var Category=require('../app/controllers/category');
 var RoleControl=require('../app/middlewares/user');
-
+var multer=require('multer');
+var multerUpload=require('../config/multerSetting');
 // index
 module.exports=function(app){
 app.use(function(req,res,next){
@@ -22,10 +23,11 @@ app.get('/',Index.index);
 app.get('/movie/:id',Movie.getMovie);
 app.get('/admin/movie/update',Movie.getUpdate);
 app.get('/admin/list',Movie.list);
-app.get('/admin/movie',Movie.getAdminMovie);
 app.delete('/admin/list',Movie.deleteMovie);
-app.put('/admin/movie/update/:id',Movie.update);
-app.post('/admin/movie/new',Movie.new);
+app.put('/admin/movie/update/:id',multerUpload.upload,Movie.update);
+// Add Movie
+app.get('/admin/movie',Movie.getAdminMovie);
+app.post('/admin/movie/new',multerUpload.upload,Movie.new);
 // User
 app.post('/user/signup',User.signup);
 app.get('/logout',User.logout);
@@ -41,7 +43,7 @@ app.post('/admin/category/new',Category.save);
 
 
 // Category result
-app.get('/:category/:page',Index.page);
+app.get('/category/:category/:page',Index.pages);
 //Search movie
 app.get('/search',Index.search);
 }
